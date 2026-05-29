@@ -265,16 +265,25 @@
     </a>
   </div>
 
+  <!-- Supabase CDN (used by supabase-loader.js when anon key is set) -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
   <script src="/scripts/nav.js"></script>
   <script src="/scripts/products.js"></script>
+  <script src="/scripts/supabase-loader.js"></script>
   <script>
-    /* ── Load product from URL param ── */
-    var id = new URLSearchParams(window.location.search).get('id') || 'citrine'
-    var p  = PRODUCTS[id]
+    var params  = new URLSearchParams(window.location.search)
+    var id      = params.get('id') || 'citrine'
+    var secret  = params.get('secret')
 
-    if (!p) {
-      document.querySelector('.pdp-wrap').innerHTML = '<div style="padding:120px 32px;text-align:center;"><h2>Product not found</h2><a href="/crystals/" style="color:var(--accent)">← Back to Crystals</a></div>'
-    } else {
+    function renderProduct(id, p) {
+      if (!p) {
+        document.querySelector('.pdp-wrap').innerHTML =
+          '<div style="padding:120px 32px;text-align:center;">' +
+          '<h2>Product not found</h2>' +
+          '<a href="/crystals/" style="color:var(--accent)">← Back to Crystals</a></div>'
+        return
+      }
+
       /* Meta */
       document.getElementById('page-title').textContent = p.name + ' — Reiky SG'
 
@@ -284,11 +293,21 @@
       catLinkEl.href = '/crystals/' + p.categorySlug + '.html'
       document.getElementById('pdp-name-crumb').textContent = p.name
 
-      /* Gallery mosaic — all 5 panels use the product gradient */
+      /* Gallery mosaic: use uploaded image URLs if available, else CSS gradient */
       var galleryIds = ['pdp-gallery-main','pdp-gallery-t1','pdp-gallery-t2','pdp-gallery-t3','pdp-gallery-t4']
-      galleryIds.forEach(function(gid) {
-        document.getElementById(gid).classList.add(p.imgClass)
-      })
+      if (p.images && p.images.length > 0) {
+        galleryIds.forEach(function(gid, i) {
+          var el = document.getElementById(gid)
+          var url = p.images[Math.min(i, p.images.length - 1)]
+          el.style.backgroundImage    = 'url(' + url + ')'
+          el.style.backgroundSize     = 'cover'
+          el.style.backgroundPosition = 'center'
+        })
+      } else if (p.imgClass) {
+        galleryIds.forEach(function(gid) {
+          document.getElementById(gid).classList.add(p.imgClass)
+        })
+      }
       if (p.badge) {
         var b = document.createElement('span')
         b.className = 'ccard-badge pdp-gallery-badge'
@@ -300,70 +319,92 @@
       document.getElementById('pdp-title').textContent = p.name
       document.getElementById('pdp-stone').textContent = p.stone
       document.getElementById('pdp-category').textContent = p.categoryEmoji + ' ' + p.category
-      document.getElementById('pdp-rating').textContent = p.rating.toFixed(1)
-      document.getElementById('pdp-review-count').textContent = p.reviewCount + ' reviews'
+      document.getElementById('pdp-rating').textContent = Number(p.rating).toFixed(1)
+      document.getElementById('pdp-review-count').textContent = (p.reviewCount || 0) + ' reviews'
 
       /* Highlights */
       var hl = document.getElementById('pdp-highlights')
-      p.highlights.forEach(function(h) {
-        hl.innerHTML += '<div class="pdp-highlight"><span class="pdp-hl-icon">' + h.icon + '</span><div><p class="pdp-hl-title">' + h.title + '</p><p class="pdp-hl-desc">' + h.desc + '</p></div></div>'
+      ;(p.highlights || []).forEach(function(h) {
+        hl.innerHTML += '<div class="pdp-highlight"><span class="pdp-hl-icon">' + h.icon +
+          '</span><div><p class="pdp-hl-title">' + h.title +
+          '</p><p class="pdp-hl-desc">' + (h.desc || h.description || '') + '</p></div></div>'
       })
 
-      /* Description — show first 350 chars + "show more" */
-      var fullDesc = p.description.replace(/\n/g, '<br><br>')
-      var shortDesc = p.description.substring(0, 350)
-      var descEl = document.getElementById('pdp-description')
-      descEl.innerHTML = shortDesc + '...'
-      var showMore = document.getElementById('pdp-show-more')
-      showMore.addEventListener('click', function() {
+      /* Description */
+      var fullDesc  = (p.description || '').replace(/\n/g, '<br><br>')
+      var shortDesc = (p.description || '').substring(0, 350)
+      var descEl    = document.getElementById('pdp-description')
+      if (p.description && p.description.length > 350) {
+        descEl.innerHTML = shortDesc + '...'
+        var showMore = document.getElementById('pdp-show-more')
+        showMore.addEventListener('click', function() {
+          descEl.innerHTML = fullDesc
+          showMore.style.display = 'none'
+        })
+      } else {
         descEl.innerHTML = fullDesc
-        showMore.style.display = 'none'
-      })
+        document.getElementById('pdp-show-more').style.display = 'none'
+      }
 
       /* Properties */
       var propsEl = document.getElementById('pdp-properties')
-      p.properties.forEach(function(prop) {
-        propsEl.innerHTML += '<div class="pdp-prop"><span class="pdp-prop-icon">' + prop.icon + '</span><div><p class="pdp-prop-label">' + prop.label + '</p><p class="pdp-prop-value">' + prop.value + '</p></div></div>'
+      ;(p.properties || []).forEach(function(prop) {
+        propsEl.innerHTML += '<div class="pdp-prop"><span class="pdp-prop-icon">' + prop.icon +
+          '</span><div><p class="pdp-prop-label">' + prop.label +
+          '</p><p class="pdp-prop-value">' + prop.value + '</p></div></div>'
       })
 
-      /* Reviews header */
-      document.getElementById('pdp-reviews-score').textContent = p.rating.toFixed(1)
-      document.getElementById('pdp-reviews-count').textContent = p.reviewCount + ' reviews'
+      /* Reviews — hide section if no review data */
+      var reviewSection = document.getElementById('reviews')
+      if (!p.reviews || p.reviews.length === 0) {
+        reviewSection.style.display = 'none'
+      } else {
+        document.getElementById('pdp-reviews-score').textContent = Number(p.rating).toFixed(1)
+        document.getElementById('pdp-reviews-count').textContent = (p.reviewCount || 0) + ' reviews'
+        var breakdown = document.getElementById('pdp-rating-breakdown')
+        ;(p.ratingBreakdown || []).forEach(function(r) {
+          var pct = (r.score / 5 * 100).toFixed(0)
+          breakdown.innerHTML += '<div class="pdp-rb-row"><span class="pdp-rb-label">' + r.label +
+            '</span><div class="pdp-rb-bar"><div class="pdp-rb-fill" style="width:' + pct +
+            '%"></div></div><span class="pdp-rb-score">' + r.score.toFixed(1) + '</span></div>'
+        })
+        var cards = document.getElementById('pdp-review-cards')
+        ;(p.reviews || []).forEach(function(r) {
+          cards.innerHTML += '<div class="pdp-review-card"><div class="pdp-reviewer">' +
+            '<div class="pdp-reviewer-avatar">' + r.initial +
+            '</div><div><p class="pdp-reviewer-name">' + r.name +
+            '</p><p class="pdp-reviewer-date">' + r.date +
+            '</p></div></div><p class="pdp-review-text">' + r.text + '</p></div>'
+        })
+      }
 
-      /* Rating breakdown */
-      var breakdown = document.getElementById('pdp-rating-breakdown')
-      p.ratingBreakdown.forEach(function(r) {
-        var pct = (r.score / 5 * 100).toFixed(0)
-        breakdown.innerHTML += '<div class="pdp-rb-row"><span class="pdp-rb-label">' + r.label + '</span><div class="pdp-rb-bar"><div class="pdp-rb-fill" style="width:' + pct + '%"></div></div><span class="pdp-rb-score">' + r.score.toFixed(1) + '</span></div>'
-      })
-
-      /* Review cards */
-      var cards = document.getElementById('pdp-review-cards')
-      p.reviews.forEach(function(r) {
-        cards.innerHTML += '<div class="pdp-review-card"><div class="pdp-reviewer"><div class="pdp-reviewer-avatar">' + r.initial + '</div><div><p class="pdp-reviewer-name">' + r.name + '</p><p class="pdp-reviewer-date">' + r.date + '</p></div></div><p class="pdp-review-text">' + r.text + '</p></div>'
-      })
-
-      /* Widget */
-      document.getElementById('widget-price').textContent = p.price
-      document.getElementById('widget-rating').textContent = p.rating.toFixed(1)
-      document.getElementById('widget-review-count').textContent = p.reviewCount + ' reviews'
-      var waMsg = 'Hi Reiky SG! I\'d like to buy the ' + p.name + ' (' + p.price + '). Is it available?'
+      /* Widget + mobile bar */
+      var displayPrice = p.price || '—'
+      document.getElementById('widget-price').textContent = displayPrice
+      document.getElementById('widget-rating').textContent = Number(p.rating).toFixed(1)
+      document.getElementById('widget-review-count').textContent = (p.reviewCount || 0) + ' reviews'
+      var waMsg = 'Hi Reiky SG! I\'d like to buy the ' + p.name + ' (' + displayPrice + '). Is it available?'
       var waUrl = 'https://wa.me/6589386813?text=' + encodeURIComponent(waMsg)
       document.getElementById('widget-buy-now').href = waUrl
-
-      /* Mobile bar */
-      document.getElementById('mobile-bar-price').textContent = p.price
+      document.getElementById('mobile-bar-price').textContent = displayPrice
       document.getElementById('mobile-bar-buy').href = waUrl
 
       /* Add to Cart */
       document.getElementById('widget-cart').addEventListener('click', function() {
         var cart = JSON.parse(localStorage.getItem('reiky-cart') || '[]')
-        cart.push({ id: id, name: p.name, price: p.price, imgClass: p.imgClass })
+        cart.push({ id: id, name: p.name, price: displayPrice, imgClass: p.imgClass })
         localStorage.setItem('reiky-cart', JSON.stringify(cart))
         var toast = document.getElementById('cart-toast')
         toast.classList.add('visible')
         setTimeout(function() { toast.classList.remove('visible') }, 2000)
       })
+    }
+
+    /* Load via secret token OR slug */
+    if (secret) {
+      window.loadProductBySecret(secret, function(p) { renderProduct(id, p) })
+    } else {
+      window.loadProduct(id, function(p) { renderProduct(id, p) })
     }
   </script>
 </body>

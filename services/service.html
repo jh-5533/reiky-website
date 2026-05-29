@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title id="page-title">Service — Reiky SG</title>
+  <meta name="description" content="Service by Reiky SG." />
+  <link rel="stylesheet" href="/styles/main.css" />
+  <style>
+    /* ── Service page specific styles ── */
+    .svc-wrap { max-width: 960px; margin: 0 auto; padding: 80px 24px 120px; }
+
+    .svc-breadcrumb { display: flex; align-items: center; gap: 8px; font-size: 13px;
+      color: #888; margin-bottom: 32px; flex-wrap: wrap; }
+    .svc-breadcrumb a { color: #888; text-decoration: none; }
+    .svc-breadcrumb a:hover { color: var(--accent, #b8864e); }
+
+    .svc-hero { display: flex; gap: 40px; align-items: flex-start; margin-bottom: 48px; }
+    .svc-image { width: 340px; flex-shrink: 0; border-radius: 16px; overflow: hidden;
+      aspect-ratio: 4/3; background: linear-gradient(135deg, #f0ebe5 0%, #d8cec4 100%);
+      display: flex; align-items: center; justify-content: center; font-size: 48px; }
+    .svc-image img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+    .svc-info { flex: 1; }
+    .svc-category { font-size: 12px; font-weight: 600; letter-spacing: .08em;
+      text-transform: uppercase; color: var(--accent, #b8864e); margin-bottom: 8px; }
+    .svc-title { font-size: 28px; font-weight: 700; color: #1a1a1a; line-height: 1.2;
+      margin-bottom: 12px; }
+    .svc-desc-short { font-size: 15px; line-height: 1.7; color: #555;
+      margin-bottom: 24px; }
+
+    /* Highlights */
+    .svc-highlights { list-style: none; padding: 0; margin: 0 0 28px; display: flex;
+      flex-direction: column; gap: 14px; }
+    .svc-highlight { display: flex; gap: 14px; }
+    .svc-hl-icon { font-size: 20px; flex-shrink: 0; margin-top: 1px; }
+    .svc-hl-title { font-size: 14px; font-weight: 600; color: #1a1a1a; }
+    .svc-hl-desc  { font-size: 13px; color: #777; margin-top: 2px; line-height: 1.5; }
+
+    /* Pricing */
+    .svc-pricing { border: 1px solid #e8e0d6; border-radius: 16px; overflow: hidden;
+      margin-bottom: 28px; }
+    .svc-pricing-header { padding: 16px 20px; background: #faf8f5;
+      border-bottom: 1px solid #e8e0d6; }
+    .svc-pricing-title { font-size: 14px; font-weight: 600; color: #1a1a1a; }
+
+    .svc-tier { display: grid; grid-template-columns: 1fr auto; align-items: start;
+      padding: 16px 20px; border-bottom: 1px solid #f5f0ea; gap: 16px; }
+    .svc-tier:last-child { border-bottom: none; }
+    .svc-tier-name { font-size: 15px; font-weight: 600; color: #1a1a1a; }
+    .svc-tier-desc { font-size: 13px; color: #888; margin-top: 4px; line-height: 1.5; }
+    .svc-tier-price { font-size: 20px; font-weight: 700; color: #1a1a1a;
+      white-space: nowrap; }
+    .svc-tier-price-note { font-size: 12px; color: #aaa; font-weight: 400; }
+
+    .svc-single-price { padding: 20px; display: flex; justify-content: space-between;
+      align-items: center; }
+    .svc-single-price-label { font-size: 15px; color: #555; }
+    .svc-single-price-amount { font-size: 28px; font-weight: 700; color: #1a1a1a; }
+
+    /* CTA */
+    .svc-cta { display: flex; flex-direction: column; gap: 12px; }
+    .svc-btn-wa { display: flex; align-items: center; justify-content: center; gap: 10px;
+      background: #07c160; color: white; border-radius: 12px; padding: 14px 24px;
+      font-size: 15px; font-weight: 600; text-decoration: none; transition: opacity .15s; }
+    .svc-btn-wa:hover { opacity: .9; color: white; }
+    .svc-btn-outline { display: flex; align-items: center; justify-content: center;
+      border: 1px solid #e8e0d6; border-radius: 12px; padding: 13px 24px;
+      font-size: 15px; font-weight: 500; color: #555; text-decoration: none;
+      transition: border-color .15s, color .15s; }
+    .svc-btn-outline:hover { border-color: var(--accent, #b8864e); color: var(--accent, #b8864e); }
+
+    /* Description full */
+    .svc-section { margin-top: 48px; }
+    .svc-section-title { font-size: 18px; font-weight: 700; color: #1a1a1a;
+      margin-bottom: 16px; padding-bottom: 12px; border-bottom: 1px solid #f0ebe5; }
+    .svc-full-desc { font-size: 15px; line-height: 1.8; color: #444; }
+    .svc-full-desc p + p { margin-top: 1em; }
+
+    /* Mobile */
+    @media (max-width: 768px) {
+      .svc-hero { flex-direction: column; }
+      .svc-image { width: 100%; }
+      .svc-wrap { padding-top: 60px; }
+    }
+  </style>
+</head>
+<body>
+
+  <div id="nav-root"></div>
+
+  <div class="svc-wrap">
+
+    <nav class="svc-breadcrumb" id="svc-breadcrumb">
+      <a href="/">Home</a>
+      <span>›</span>
+      <a href="/services/">Services</a>
+      <span>›</span>
+      <span id="svc-name-crumb">Service</span>
+    </nav>
+
+    <div class="svc-hero">
+
+      <!-- Image -->
+      <div class="svc-image" id="svc-image">🌿</div>
+
+      <!-- Info + pricing -->
+      <div class="svc-info">
+        <p class="svc-category" id="svc-category">Service</p>
+        <h1 class="svc-title" id="svc-title">Service Name</h1>
+        <p class="svc-desc-short" id="svc-desc-short"></p>
+
+        <!-- Highlights -->
+        <ul class="svc-highlights" id="svc-highlights"></ul>
+
+        <!-- Pricing -->
+        <div class="svc-pricing" id="svc-pricing"></div>
+
+        <!-- CTA -->
+        <div class="svc-cta">
+          <a class="svc-btn-wa" id="svc-btn-wa" href="https://wa.me/6589386813" target="_blank" rel="noopener">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.127.558 4.126 1.534 5.86L0 24l6.335-1.51A11.955 11.955 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 01-5.001-1.366l-.357-.213-3.76.896.953-3.659-.233-.376A9.792 9.792 0 012.182 12C2.182 6.575 6.575 2.182 12 2.182S21.818 6.575 21.818 12 17.425 21.818 12 21.818z"/></svg>
+            Enquire on WhatsApp
+          </a>
+          <a class="svc-btn-outline" href="/#contact">Book a Consultation</a>
+        </div>
+      </div>
+
+    </div><!-- /svc-hero -->
+
+    <!-- Full description -->
+    <div class="svc-section" id="svc-full-section" style="display:none">
+      <h2 class="svc-section-title">About This Service</h2>
+      <div class="svc-full-desc" id="svc-full-desc"></div>
+    </div>
+
+  </div><!-- /svc-wrap -->
+
+  <!-- Footer (same as other pages) -->
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-top">
+        <div class="footer-top-left">
+          <h2 class="footer-headline">Crystals aligned<br>with your energy.</h2>
+          <div class="footer-ctas">
+            <a href="/crystals/" class="footer-btn footer-btn--primary">Shop Crystals</a>
+            <a href="https://wa.me/6589386813?text=Hi%20Reiky%20SG!%20I'd%20like%20to%20learn%20more." class="footer-btn footer-btn--outline" target="_blank" rel="noopener">WhatsApp Us</a>
+          </div>
+        </div>
+        <div class="footer-top-right">
+          <span class="footer-wordmark">Reiky <span>SG</span></span>
+          <div class="footer-socials">
+            <a href="https://wa.me/6589386813" target="_blank" rel="noopener" aria-label="WhatsApp" class="footer-social-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.127.558 4.126 1.534 5.86L0 24l6.335-1.51A11.955 11.955 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 01-5.001-1.366l-.357-.213-3.76.896.953-3.659-.233-.376A9.792 9.792 0 012.182 12C2.182 6.575 6.575 2.182 12 2.182S21.818 6.575 21.818 12 17.425 21.818 12 21.818z"/></svg>
+            </a>
+            <a href="https://instagram.com/reiky.sg" target="_blank" rel="noopener" aria-label="Instagram" class="footer-social-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+            </a>
+            <a href="https://tiktok.com/@reiky.sg" target="_blank" rel="noopener" aria-label="TikTok" class="footer-social-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.34 6.34 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.99a8.16 8.16 0 004.78 1.52V7.06a4.85 4.85 0 01-1.01-.37z"/></svg>
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-nav">
+        <div class="footer-col">
+          <p class="footer-col-heading">Shop</p>
+          <ul>
+            <li><a href="/crystals/wealth.html">Wealth &amp; Abundance</a></li>
+            <li><a href="/crystals/love.html">Love &amp; Relationships</a></li>
+            <li><a href="/crystals/protection.html">Protection &amp; Grounding</a></li>
+            <li><a href="/crystals/">All Crystals</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <p class="footer-col-heading">Services</p>
+          <ul>
+            <li><a href="/bazi-analysis.html">Bazi Analysis</a></li>
+            <li><a href="/wealth-prayers.html">Wealth Prayers</a></li>
+            <li><a href="/#contact">Crystal Consultation</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <p class="footer-col-heading">Explore</p>
+          <ul>
+            <li><a href="/#about">Our Story</a></li>
+            <li><a href="/#how-it-works">How It Works</a></li>
+            <li><a href="/#reviews">Reviews</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <p class="footer-col-heading">Legal</p>
+          <ul>
+            <li><a href="/privacy.html">Privacy Policy</a></li>
+            <li><a href="/terms.html">Terms of Service</a></li>
+            <li><a href="/#contact">Contact</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 Reiky SG. All rights reserved.</p>
+        <div class="footer-bottom-links">
+          <a href="/privacy.html">Privacy Policy</a>
+          <a href="/terms.html">Terms of Service</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+  <script src="/scripts/nav.js"></script>
+  <script src="/scripts/supabase-loader.js"></script>
+  <script>
+    var params = new URLSearchParams(window.location.search)
+    var id     = params.get('id') || ''
+    var secret = params.get('secret')
+
+    function renderService(s) {
+      if (!s) {
+        document.querySelector('.svc-wrap').innerHTML =
+          '<div style="padding:120px 32px;text-align:center;">' +
+          '<h2>Service not found</h2>' +
+          '<a href="/" style="color:var(--accent)">← Back to Home</a></div>'
+        return
+      }
+
+      document.getElementById('page-title').textContent = s.name + ' — Reiky SG'
+      document.getElementById('svc-name-crumb').textContent = s.name
+      document.getElementById('svc-category').textContent   = s.category || 'Service'
+      document.getElementById('svc-title').textContent      = s.name
+
+      /* Image */
+      var imgEl = document.getElementById('svc-image')
+      if (s.image_url) {
+        imgEl.innerHTML = '<img src="' + s.image_url + '" alt="' + s.name + '">'
+      }
+
+      /* Short description (first 200 chars) */
+      var desc = s.description || ''
+      document.getElementById('svc-desc-short').textContent =
+        desc.length > 200 ? desc.substring(0, 200) + '…' : desc
+
+      /* Full description */
+      if (desc) {
+        document.getElementById('svc-full-section').style.display = ''
+        document.getElementById('svc-full-desc').innerHTML =
+          desc.replace(/\n\n/g, '</p><p>').replace(/\n/g, '<br>')
+      }
+
+      /* Highlights */
+      var hlEl = document.getElementById('svc-highlights')
+      ;(s.highlights || []).filter(function(h) { return h.title }).forEach(function(h) {
+        hlEl.innerHTML +=
+          '<li class="svc-highlight">' +
+          '<span class="svc-hl-icon">' + (h.icon || '•') + '</span>' +
+          '<div><p class="svc-hl-title">' + h.title + '</p>' +
+          '<p class="svc-hl-desc">' + (h.description || h.desc || '') + '</p></div>' +
+          '</li>'
+      })
+
+      /* Pricing */
+      var pricingEl = document.getElementById('svc-pricing')
+      var tiers = s.tiers || []
+      if (tiers.length > 0) {
+        var html = '<div class="svc-pricing-header"><p class="svc-pricing-title">Pricing Options</p></div>'
+        tiers.forEach(function(t) {
+          html +=
+            '<div class="svc-tier">' +
+            '<div><p class="svc-tier-name">' + (t.name || '') + '</p>' +
+            '<p class="svc-tier-desc">' + (t.description || '') + '</p></div>' +
+            '<div style="text-align:right">' +
+            '<p class="svc-tier-price">S$' + Number(t.price_sgd || 0).toFixed(2) + '</p>' +
+            '<p class="svc-tier-price-note">per session</p></div>' +
+            '</div>'
+        })
+        pricingEl.innerHTML = html
+      } else if (s.price_sgd) {
+        pricingEl.innerHTML =
+          '<div class="svc-single-price">' +
+          '<span class="svc-single-price-label">Price</span>' +
+          '<span class="svc-single-price-amount">S$' + Number(s.price_sgd).toFixed(2) + '</span>' +
+          '</div>'
+      } else {
+        pricingEl.style.display = 'none'
+      }
+
+      /* WhatsApp CTA */
+      var waMsg = 'Hi Reiky SG! I\'d like to enquire about ' + s.name + '. Could you tell me more?'
+      document.getElementById('svc-btn-wa').href =
+        'https://wa.me/6589386813?text=' + encodeURIComponent(waMsg)
+    }
+
+    /* Load via secret token OR slug */
+    if (secret) {
+      window.loadServiceBySecret(secret, renderService)
+    } else {
+      window.loadService(id, renderService)
+    }
+  </script>
+</body>
+</html>
