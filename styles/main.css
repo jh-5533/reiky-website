@@ -10,9 +10,9 @@
   --text:         #1c1c1a;
   --text-muted:   #5c5c58;
   --text-subtle:  #9c9c98;
-  --accent:       #2D6A4F;
-  --accent-light: #E8F5EE;
-  --accent-hover: #255C43;
+  --accent:       #C2185B;
+  --accent-light: #FCE4EC;
+  --accent-hover: #AD1457;
   --gold:         #C4956A;
   --gold-light:   #FAF3EB;
 
@@ -166,7 +166,7 @@ h1,h2,h3,h4,h5,h6 { letter-spacing: -0.02em; line-height: 1.2; }
 .hero-badge {
   display: inline-flex; align-items: center; gap: 8px;
   padding: 5px 14px; background: var(--accent-light);
-  border: 1px solid #B8DEC9; border-radius: var(--radius-full);
+  border: 1px solid #F48FB1; border-radius: var(--radius-full);
   font-size: 12px; font-weight: 600; color: var(--accent);
   margin-bottom: 24px; letter-spacing: 0.02em;
 }
@@ -413,11 +413,11 @@ h1,h2,h3,h4,h5,h6 { letter-spacing: -0.02em; line-height: 1.2; }
 .btn-enquire {
   display: inline-flex; align-items: center; gap: 6px;
   font-size: 12px; font-weight: 600; color: var(--accent);
-  background: var(--accent-light); border: 1px solid #B8DEC9;
+  background: var(--accent-light); border: 1px solid #F48FB1;
   border-radius: var(--radius-sm); padding: 6px 14px;
   transition: background 0.15s, border-color 0.15s; text-decoration: none;
 }
-.btn-enquire:hover { background: #D6ECDF; border-color: var(--accent); }
+.btn-enquire:hover { background: #F8BBD9; border-color: var(--accent); }
 
 /* ── FEATURE LIST ── */
 .feature-list { list-style: none; padding: 0; margin-top: 32px; display: flex; flex-direction: column; gap: 12px; }
