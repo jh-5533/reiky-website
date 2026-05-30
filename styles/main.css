@@ -126,6 +126,30 @@ h1,h2,h3,h4,h5,h6 { letter-spacing: -0.02em; line-height: 1.2; }
 /* ── NAV ACTIONS ── */
 .nav-actions { display: flex; align-items: center; gap: 8px; margin-left: auto; }
 
+/* ── LANGUAGE TOGGLE ── */
+.lang-toggle {
+  background: none;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  color: var(--text-muted);
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: .04em;
+  padding: 5px 10px;
+  transition: border-color .15s, color .15s;
+}
+.lang-toggle:hover { border-color: var(--accent); color: var(--accent); }
+.lang-toggle--mobile {
+  display: block;
+  width: 100%;
+  text-align: left;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 10px 16px;
+  font-size: 14px;
+}
+
 /* ── NAV MOBILE ── */
 .nav-hamburger {
   display: none; flex-direction: column; gap: 5px;

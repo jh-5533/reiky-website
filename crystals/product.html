@@ -15,9 +15,9 @@
 
     <!-- ── BREADCRUMB ── -->
     <nav class="pdp-breadcrumb" id="pdp-breadcrumb" aria-label="Breadcrumb">
-      <a href="/">Home</a>
+      <a href="/" data-i18n="pdp_home">Home</a>
       <span>›</span>
-      <a href="/crystals/">Crystals</a>
+      <a href="/crystals/" data-i18n="pdp_crystals">Crystals</a>
       <span>›</span>
       <a href="#" id="pdp-cat-link">Wealth &amp; Abundance</a>
       <span>›</span>
@@ -66,14 +66,14 @@
         <!-- Description -->
         <div class="pdp-description" id="pdp-description-wrap">
           <p class="pdp-desc-text" id="pdp-description"></p>
-          <button class="pdp-show-more" id="pdp-show-more">Show more</button>
+          <button class="pdp-show-more" id="pdp-show-more" data-i18n="btn_show_more">Show more</button>
         </div>
 
         <div class="pdp-divider"></div>
 
         <!-- Crystal Properties -->
         <div class="pdp-props-section">
-          <h2 class="pdp-section-title">Crystal Properties</h2>
+          <h2 class="pdp-section-title" data-i18n="pdp_crystal_props">Crystal Properties</h2>
           <div class="pdp-props-grid" id="pdp-properties">
             <!-- populated by JS -->
           </div>
@@ -103,30 +103,30 @@
 
         <!-- Things to Know -->
         <section class="pdp-ttk">
-          <h2 class="pdp-section-title">Things to Know</h2>
+          <h2 class="pdp-section-title" data-i18n="pdp_things_to_know">Things to Know</h2>
           <div class="pdp-ttk-grid">
             <div>
-              <h3 class="pdp-ttk-col-title">Crystal Care</h3>
+              <h3 class="pdp-ttk-col-title" data-i18n="pdp_crystal_care">Crystal Care</h3>
               <ul class="pdp-ttk-list">
-                <li>Cleanse monthly under running water or moonlight</li>
-                <li>Avoid prolonged direct sunlight (may fade some crystals)</li>
-                <li>Do not soak in salt water — damages elastic cord</li>
+                <li data-i18n="pdp_care1">Cleanse monthly under running water or moonlight</li>
+                <li data-i18n="pdp_care2">Avoid prolonged direct sunlight (may fade some crystals)</li>
+                <li data-i18n="pdp_care3">Do not soak in salt water — damages elastic cord</li>
               </ul>
             </div>
             <div>
-              <h3 class="pdp-ttk-col-title">Shipping &amp; Returns</h3>
+              <h3 class="pdp-ttk-col-title" data-i18n="pdp_shipping">Shipping &amp; Returns</h3>
               <ul class="pdp-ttk-list">
-                <li>Free delivery within Singapore (1–3 business days)</li>
-                <li>Same-day dispatch for orders before 2pm</li>
-                <li>7-day returns for unworn items in original packaging</li>
+                <li data-i18n="pdp_ship1">Free delivery within Singapore (1–3 business days)</li>
+                <li data-i18n="pdp_ship2">Same-day dispatch for orders before 2pm</li>
+                <li data-i18n="pdp_ship3">7-day returns for unworn items in original packaging</li>
               </ul>
             </div>
             <div>
-              <h3 class="pdp-ttk-col-title">Our Promise</h3>
+              <h3 class="pdp-ttk-col-title" data-i18n="pdp_promise">Our Promise</h3>
               <ul class="pdp-ttk-list">
-                <li>All crystals are natural and ethically sourced</li>
-                <li>Intention-set under moonlight before shipping</li>
-                <li>Certificate of authenticity available on request</li>
+                <li data-i18n="pdp_promise1">All crystals are natural and ethically sourced</li>
+                <li data-i18n="pdp_promise2">Intention-set under moonlight before shipping</li>
+                <li data-i18n="pdp_promise3">Certificate of authenticity available on request</li>
               </ul>
             </div>
           </div>
@@ -141,7 +141,7 @@
           <!-- Price + rating -->
           <div class="pdp-widget-price-row">
             <span class="pdp-widget-price" id="widget-price">$38 SGD</span>
-            <span class="pdp-widget-price-note">per bracelet</span>
+            <span class="pdp-widget-price-note" data-i18n="pdp_per_bracelet">per bracelet</span>
           </div>
           <div class="pdp-widget-rating">
             <span class="pdp-star">★</span>
@@ -155,7 +155,7 @@
           <!-- Delivery note -->
           <div class="pdp-widget-delivery">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13"/><path d="M16 8h4l3 3v5h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
-            Free delivery within Singapore
+            <span data-i18n="pdp_free_delivery">Free delivery within Singapore</span>
           </div>
 
           <!-- Buy Now (WhatsApp) -->
@@ -163,19 +163,19 @@
              href="https://wa.me/6589386813"
              target="_blank" rel="noopener">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.127.558 4.126 1.534 5.86L0 24l6.335-1.51A11.955 11.955 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 01-5.001-1.366l-.357-.213-3.76.896.953-3.659-.233-.376A9.792 9.792 0 012.182 12C2.182 6.575 6.575 2.182 12 2.182S21.818 6.575 21.818 12 17.425 21.818 12 21.818z"/></svg>
-            Buy Now on WhatsApp
+            <span data-i18n="btn_buy_now_wa">Buy Now on WhatsApp</span>
           </a>
 
           <!-- Add to Cart -->
           <button class="pdp-add-to-cart" id="widget-cart">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
-            Add to Cart
+            <span data-i18n="btn_add_cart">Add to Cart</span>
           </button>
 
           <!-- Toast -->
-          <div class="pdp-cart-toast" id="cart-toast">Added to cart!</div>
+          <div class="pdp-cart-toast" id="cart-toast" data-i18n="pdp_added_to_cart">Added to cart!</div>
 
-          <p class="pdp-widget-note">You won't be charged until we confirm availability via WhatsApp.</p>
+          <p class="pdp-widget-note" data-i18n="pdp_note">You won't be charged until we confirm availability via WhatsApp.</p>
         </div>
       </aside>
 
@@ -187,10 +187,10 @@
     <div class="footer-container">
       <div class="footer-top">
         <div class="footer-top-left">
-          <h2 class="footer-headline">Crystals aligned<br>with your energy.</h2>
+          <h2 class="footer-headline" data-i18n="footer_headline">Crystals aligned<br>with your energy.</h2>
           <div class="footer-ctas">
-            <a href="/crystals/" class="footer-btn footer-btn--primary">Shop Crystals</a>
-            <a href="https://wa.me/6589386813?text=Hi%20Reiky%20SG!%20I'd%20like%20to%20learn%20more." class="footer-btn footer-btn--outline" target="_blank" rel="noopener">WhatsApp Us</a>
+            <a href="/crystals/" class="footer-btn footer-btn--primary" data-i18n="footer_shop_crystals">Shop Crystals</a>
+            <a href="https://wa.me/6589386813?text=Hi%20Reiky%20SG!%20I'd%20like%20to%20learn%20more." class="footer-btn footer-btn--outline" target="_blank" rel="noopener" data-i18n="footer_whatsapp_us">WhatsApp Us</a>
           </div>
         </div>
         <div class="footer-top-right">
@@ -210,44 +210,44 @@
       </div>
       <div class="footer-nav">
         <div class="footer-col">
-          <p class="footer-col-heading">Shop</p>
+          <p class="footer-col-heading" data-i18n="footer_shop">Shop</p>
           <ul>
-            <li><a href="/crystals/wealth.html">Wealth &amp; Abundance</a></li>
-            <li><a href="/crystals/love.html">Love &amp; Relationships</a></li>
-            <li><a href="/crystals/protection.html">Protection &amp; Grounding</a></li>
-            <li><a href="/crystals/">All Crystals</a></li>
+            <li><a href="/crystals/wealth.html" data-i18n="footer_wealth_link">Wealth &amp; Abundance</a></li>
+            <li><a href="/crystals/love.html" data-i18n="footer_love_link">Love &amp; Relationships</a></li>
+            <li><a href="/crystals/protection.html" data-i18n="footer_protection_link">Protection &amp; Grounding</a></li>
+            <li><a href="/crystals/" data-i18n="footer_all_crystals">All Crystals</a></li>
           </ul>
         </div>
         <div class="footer-col">
-          <p class="footer-col-heading">Services</p>
+          <p class="footer-col-heading" data-i18n="footer_services">Services</p>
           <ul>
-            <li><a href="/bazi-analysis.html">Bazi Analysis</a></li>
-            <li><a href="/wealth-prayers.html">Wealth Prayers</a></li>
-            <li><a href="/#contact">Crystal Consultation</a></li>
+            <li><a href="/bazi-analysis.html" data-i18n="footer_bazi">Bazi Analysis</a></li>
+            <li><a href="/wealth-prayers.html" data-i18n="footer_prayers">Wealth Prayers</a></li>
+            <li><a href="/#contact" data-i18n="footer_consultation">Crystal Consultation</a></li>
           </ul>
         </div>
         <div class="footer-col">
-          <p class="footer-col-heading">Explore</p>
+          <p class="footer-col-heading" data-i18n="footer_explore">Explore</p>
           <ul>
-            <li><a href="/#about">Our Story</a></li>
-            <li><a href="/#how-it-works">How It Works</a></li>
-            <li><a href="/#reviews">Reviews</a></li>
+            <li><a href="/#about" data-i18n="footer_our_story">Our Story</a></li>
+            <li><a href="/#how-it-works" data-i18n="footer_how_it_works">How It Works</a></li>
+            <li><a href="/#reviews" data-i18n="footer_reviews">Reviews</a></li>
           </ul>
         </div>
         <div class="footer-col">
-          <p class="footer-col-heading">Legal</p>
+          <p class="footer-col-heading" data-i18n="footer_legal">Legal</p>
           <ul>
-            <li><a href="/privacy.html">Privacy Policy</a></li>
-            <li><a href="/terms.html">Terms of Service</a></li>
-            <li><a href="/#contact">Contact</a></li>
+            <li><a href="/privacy.html" data-i18n="footer_privacy">Privacy Policy</a></li>
+            <li><a href="/terms.html" data-i18n="footer_terms">Terms of Service</a></li>
+            <li><a href="/#contact" data-i18n="footer_contact">Contact</a></li>
           </ul>
         </div>
       </div>
       <div class="footer-bottom">
-        <p>&copy; 2026 Reiky SG. All rights reserved.</p>
+        <p data-i18n="footer_copyright">&copy; 2026 Reiky SG. All rights reserved.</p>
         <div class="footer-bottom-links">
-          <a href="/privacy.html">Privacy Policy</a>
-          <a href="/terms.html">Terms of Service</a>
+          <a href="/privacy.html" data-i18n="footer_privacy">Privacy Policy</a>
+          <a href="/terms.html" data-i18n="footer_terms">Terms of Service</a>
         </div>
       </div>
     </div>
@@ -257,16 +257,17 @@
   <div class="pdp-mobile-bar" id="pdp-mobile-bar">
     <div class="pdp-mobile-bar-left">
       <span class="pdp-mobile-bar-price" id="mobile-bar-price">$38 SGD</span>
-      <span class="pdp-mobile-bar-note">per bracelet</span>
+      <span class="pdp-mobile-bar-note" data-i18n="pdp_per_bracelet">per bracelet</span>
     </div>
     <a class="pdp-mobile-bar-btn" id="mobile-bar-buy" href="#" target="_blank" rel="noopener">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.127.558 4.126 1.534 5.86L0 24l6.335-1.51A11.955 11.955 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 01-5.001-1.366l-.357-.213-3.76.896.953-3.659-.233-.376A9.792 9.792 0 012.182 12C2.182 6.575 6.575 2.182 12 2.182S21.818 6.575 21.818 12 17.425 21.818 12 21.818z"/></svg>
-      Buy Now
+      <span data-i18n="btn_buy_now">Buy Now</span>
     </a>
   </div>
 
   <!-- Supabase CDN (used by supabase-loader.js when anon key is set) -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+  <script src="/scripts/i18n.js"></script>
   <script src="/scripts/nav.js"></script>
   <script src="/scripts/products.js"></script>
   <script src="/scripts/supabase-loader.js"></script>
